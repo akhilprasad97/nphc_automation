@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Create a template{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+
+
+    <div class='container'>
+      <div class='row'>
+        <label for="dropdown">Customer:</label>
+      </div>
+      <div class='row'>
+        <select class="custom-select custom-select-sm" name='customer' required=true>
+          <option >Select the customer</option>
+          {% for cust in customers %}
+            <option value={{cust}}>{{cust}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      
+      <div class='row'>
+        <label for="dropdown">Template Name:</label>
+      </div>
+      <div class='row'>
+        <select class="custom-select" name='template' required=true>
+          <option selected> Select a template</option>
+          {% for command in commands %}
+            <option value={{command}}>{{command}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <!-- <div class='row'>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Description: </span>
+          </div>
+          <textarea class="form-control" aria-label="With textarea"></textarea>
+        </div>
+      </div> -->
+      <div class="form-group">
+        <label for="inputsm">Description</label>
+        <input class="form-control input-sm" id="Description" name='description' type="text" required=true>
+      </div>
+      <input type="submit" class="btn btn-secondary btn-sm" value="Launch">
+    </div>
+  </form>
+    {% endblock %}

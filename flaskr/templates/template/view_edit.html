@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}View/edit template{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <div class="form-group">
+      <label for="dropdown">Customer:</label>
+        <select class="custom-select" id="customer" name='customer' type="text" required=true>
+          {% for cust in customers %}
+            <option value={{cust}}>{{cust}}</option>
+          {% endfor %}
+        </select>
+    </div>
+  </form>
+  <form method='post'>
+      <div class="form-group">
+        <label for="inputsm">Template_name:</label>
+        <input class="form-control input-sm" id="template" name='template' type="text" required=true>
+      </div>
+      <input type="submit" class="btn btn-secondary btn-sm" value="Create">
+  </form>
+{% endblock %}
+
+
