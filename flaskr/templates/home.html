@@ -1,32 +1,57 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>Create a job</h1>
+<div class="cyan-text">
+  <h4>Create a job</h4>
+</div>
 {% endblock %}
 
 {% block content %}
+<br><br>
+<div class="white-text">
   <form method="post">
-    <div class='container'>
-      <div class="form-group">
-        <label for="dropdown">Custmoer:</label>
-        <select class="custom-select" id="customer" name='customer' type="text" required=true>
+      <div class="input-field col s12">
+        <select name="customer" required=true placeholder="Select Customer">
+          <option value="" disabled=true selected=true>Select Customer</option>
           {% for cust in customers %}
             <option value={{cust}}>{{cust}}</option>
           {% endfor %}
         </select>
+        <label>Customer</label>
       </div>
-      
-      <div class="form-group">
-        <label for="dropdown">Template:</label>
-        <select class="custom-select" id="template" name='template' type="text" required=true >
+      <br>
+      <div class="input-field col s12">
+        <select type="text" name="template" required=true placeholder="Select Template">
+          <option value="" disabled=true selected=true>Select Template</option>
           {% for template in templates %}
             <option value={{template}}>{{template}}</option>
           {% endfor %}
         </select>
+        <label>Template</label>
       </div>
-      <div class="form-group">
-        <button type="input" class="btn btn-secondary btn-sm">Launch</button>
+      <br>
+      <button data-target="modal1" class="btn modal-trigger">Launch</button>
+      <div class="container">
+        <div class="black-text">
+          <div id="modal1" class="modal modal-fixed-footer" style="display:none;">
+            <div class="modal-content">
+                <div class="file-field input-field">
+                  <div class="btn">
+                    <span>Select File</span>
+                    <input type="file">
+                  </div>
+                  <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text" placeholder="Browse a File">
+                  </div>
+                </div>
+              </div>
+            <div class="modal-footer">
+              <a class="modal-action modal-close waves-effect waves-green btn-flat" href="#" type="sumbit">Submit</a>
+            </div>
+        </div>
+        </div>
+        
       </div>
-    </div>
   </form>
+</div>
 {% endblock %}

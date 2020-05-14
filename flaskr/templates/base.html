@@ -1,71 +1,93 @@
-<!doctype html>
+<!Doctype html>
+<html>
 <title>{% block title %}{% endblock %} - Flaskr</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark"> 
-    <!-- Links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href='/home'>Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href=#>Highlights</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Violations</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/extra">extra</a>
-      </li>
-      <li class="nav-item">
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Templates
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="/templates/create">Create</a>
-              <a class="dropdown-item" href="/templates/vet">View/edit</a>
-            </div>
-          </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Settings</a>
-      </li>
-      <li class="nav-item">
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Help?
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Discussions</a>
-              <a class="dropdown-item" href="#">FAQ</a>
-              <a class="dropdown-item" href="#">Raise a case?</a>
-            </div>
-          </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/User/login">Login</a>
-      </li>
+<!--<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">-->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
+  <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>           
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+
+<header>
+    <!-- Latest compiled and minified CSS 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>-->
+
+    <!-- Latest compiled JavaScript -->
+    <ul id='dropdown_template' class='dropdown-content'>
+      <li><a href="/templates/create">Create</a></li>
+      <li><a href="/templates/vet">View</a></li>
     </ul>
-  </nav>
-  <section class="content">
-    <header>
-      <!-- Latest compiled and minified CSS -->
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-  
-      <!-- jQuery library -->
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  
-      <!-- Popper JS -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  
-      <!-- Latest compiled JavaScript -->
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <ul id='dropdown_help' class='dropdown-content'>
+      <li><a href="#">Discussions</a></li>
+      <li><a href="#">FAQ</a></li>
+      <li><a href="#">Raise a Case</a></li>
+    </ul>
+    <div class="container">
+    <nav class="cyan"> 
+        <!-- Links -->
+      <div class="nav-wrapper">
+        <ul class="left hide-on-med-and-down">
+          <li>
+            <a href='/home'>Home</a>
+          </li>
+          <li>
+            <a href=#>Highlights</a>
+          </li>
+          <li>
+            <a href="#">Violations</a>
+          </li>
+          <li>
+            <a href="/extra">extra</a>
+          </li>
+          <li>
+            <a class='dropdown-trigger' data-activates='dropdown_template' data-constrainWidth="false" style="width:max-content;height:auto;">Templates</a>
+          </li>
+          <li>
+            <a href="#">Settings</a>
+          </li>
+          <li>
+            <a class='dropdown-trigger'data-activates='dropdown_help' data-constrainWidth="false" style="width:max-content;height:auto;">Help</a>
+          </li>
+          <li>
+            <a href="/User/login">Login</a>
+          </li>
+        </ul>
+      </div>
+      </nav>
       {% block header %}{% endblock %}
-    </header>
-    {% for message in get_flashed_messages() %}
+    </div>
+  </header>
+
+<body style = "background-color: black">
+  <div class="container">
+  {% for message in get_flashed_messages() %}
     <div class="flash">{{ message }}</div>
     {% endfor %}
 
-    {% block content %}
-    {% endblock %}
-  </section>
+  {% block content %}
+  {% endblock %}
+  </div>
+</body>
+<script>
+  $(document).ready(function(){
+    $('.dropdown-trigger').dropdown({
+      constrain_width: false,
+      hover: true
+    });
+    $('.modal').modal();
+    $('select').material_select();
+  })
+</script>
+</html>
