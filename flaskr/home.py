@@ -3,7 +3,7 @@ from collections import defaultdict
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
-
+from werkzeug.utils import secure_filename
 from flaskr.db import get_db
 bp = Blueprint('home', __name__, url_prefix='/home')
 @bp.route('/', methods=('GET', 'POST'))
@@ -11,13 +11,11 @@ def index():
     if request.method == 'POST':
         customer = request.form['customer']
         template = request.form['template']
-        db = get_db()
-        db = get_db()
-        db.execute(
-            'insert into JOB_S (Customer_name, Template_Id) VALUES (?, ?)', (customer, template)
-        )
-        db.commit()
-        return redirect(url_for('home.index'))
+        input_file = request.files['file']
+        input_file.save(secure_filename(input_file.filename))
+        print("The customer name is '" + customer + "'")
+        #print(secure_name(input_file.filename))
+
 
     db = get_db()
     cur = db.cursor()

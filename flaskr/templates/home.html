@@ -9,7 +9,7 @@
 {% block content %}
 <br><br>
 <div class="white-text">
-  <form method="post">
+  <form method="post" action='#' enctype = "multipart/form-data">
       <div class="input-field col s12">
         <select name="customer" required=true placeholder="Select Customer">
           <option value="" disabled=true selected=true>Select Customer</option>
@@ -38,15 +38,27 @@
                 <div class="file-field input-field">
                   <div class="btn">
                     <span>Select File</span>
-                    <input type="file">
+                    <input type="file" name='file'>
                   </div>
                   <div class="file-path-wrapper">
                     <input class="file-path validate" type="text" placeholder="Browse a File">
                   </div>
+                <div class="progress">
+                  <progress id="progress_bar" min="1" max="100"></progress>
+                  <div class="determinate" style="width: 70%">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input id="email" type="email" class="validate">
+                    <label for="email">Email</label>
+                    <span class="helper-text" data-error="wrong" data-success="right">Enter the email Address of the stakeholders to be notified</span>
+                  </div>
+                </div>
                 </div>
               </div>
             <div class="modal-footer">
-              <a class="modal-action modal-close waves-effect waves-green btn-flat" href="#" type="sumbit">Submit</a>
+              <button class="modal-action modal-close waves-effect waves-green btn-flat" type="submit">Submit</button>
             </div>
         </div>
         </div>
