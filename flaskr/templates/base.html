@@ -80,6 +80,23 @@
   {% endblock %}
   </div>
 </body>
+
+<script>
+  function enable_button(){
+    var temp_status = document.getElementById("template_name").value;
+    var cust_status = document.getElementById("customer_name").value;
+    if(temp_status!="" && cust_status!=""){
+      document.getElementById("launch_btn").disabled = false;
+    }
+  }
+
+  function validate_file_ext(){
+    var file_ext = document.getElementById("file_ext").value.split(".").pop().toLowerCase();
+    if(file_ext=="zip"){
+      document.getElementById("submit_btn").disabled=false;
+    }
+  }
+</script>
 <script>
   $(document).ready(function(){
     $('.dropdown-trigger').dropdown({

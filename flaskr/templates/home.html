@@ -11,7 +11,7 @@
 <div class="white-text">
   <form method="post" action='#' enctype = "multipart/form-data">
       <div class="input-field col s12">
-        <select name="customer" required=true placeholder="Select Customer">
+        <select name="customer" required=true placeholder="Select Customer" id="customer_name" onchange="enable_button()">
           <option value="" disabled=true selected=true>Select Customer</option>
           {% for cust in customers %}
             <option value={{cust}}>{{cust}}</option>
@@ -21,7 +21,7 @@
       </div>
       <br>
       <div class="input-field col s12">
-        <select type="text" name="template" required=true placeholder="Select Template">
+        <select type="text" name="template" required=true placeholder="Select Template" id="template_name" onchange="enable_button()">
           <option value="" disabled=true selected=true>Select Template</option>
           {% for template in templates %}
             <option value={{template}}>{{template}}</option>
@@ -30,7 +30,7 @@
         <label>Template</label>
       </div>
       <br>
-      <button data-target="modal1" class="btn modal-trigger">Launch</button>
+      <button data-target="modal1" class="btn modal-trigger" disabled id="launch_btn" >Launch</button>
       <div class="container">
         <div class="black-text">
           <div id="modal1" class="modal modal-fixed-footer" style="display:none;">
@@ -41,7 +41,7 @@
                     <input type="file" name='file'>
                   </div>
                   <div class="file-path-wrapper">
-                    <input class="file-path validate" type="text" placeholder="Browse a File">
+                    <input class="file-path validate" type="text" placeholder="Browse a File" id="file_ext" onchange="validate_file_ext()">
                   </div>
                 <div class="progress">
                   <progress id="progress_bar" min="1" max="100"></progress>
@@ -50,7 +50,7 @@
                 </div>
                 <div class="row">
                   <div class="input-field col s12">
-                    <input id="email" type="email" class="validate">
+                    <input id="email" required type="email" class="validate">
                     <label for="email">Email</label>
                     <span class="helper-text" data-error="wrong" data-success="right">Enter the email Address of the stakeholders to be notified</span>
                   </div>
@@ -58,7 +58,7 @@
                 </div>
               </div>
             <div class="modal-footer">
-              <button class="modal-action modal-close waves-effect waves-green btn-flat" type="submit">Submit</button>
+              <button class="modal-action modal-close waves-effect waves-green btn-flat" type="submit" disabled id= "submit_btn">Submit</button>
             </div>
         </div>
         </div>

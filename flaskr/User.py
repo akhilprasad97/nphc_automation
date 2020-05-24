@@ -5,7 +5,7 @@ from flask import (
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from flaskr.db import get_db
+from flaskr.db import get_mongo
 
 bp = Blueprint('User', __name__, url_prefix='/User')
 @bp.route('/login', methods=('GET', 'POST'))
@@ -13,7 +13,7 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        db = get_db()
+        db = get_mongo()
         error = None
 
         if username is None:

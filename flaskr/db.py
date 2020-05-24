@@ -1,44 +1,39 @@
 
-import sqlite3
 
+import pymongo
+
+from sshtunnel import SSHTunnelForwarder
 import click
 from flask import current_app, g
 from flask.cli import with_appcontext
 
 
-def get_db():
-    if 'db' not in g:
-        g.db = sqlite3.connect(
-            current_app.config['DATABASE'],
-            detect_types=sqlite3.PARSE_DECLTYPES
+def get_mongo():
+    if 'mongo' not in g:
+        hostname = "10.127.250.99"
+        username = "calo"
+        password = "cisco"
+        
+        server = SSHTunnelForwarder(
+        hostname,
+        ssh_username=username,
+        ssh_password=password,
+        remote_bind_address=('127.0.0.1', 27017)
         )
-        g.db.row_factory = sqlite3.Row
 
-    return g.db
+        server.start()
+        g.mongo = pymongo.MongoClient('127.0.0.1', server.local_bind_port)
 
-
-
-def close_db(e=None):
-    db = g.pop('db', None)
-
-    if db is not None:
-        db.close()
-
-def init_db():
-    db = get_db()
-
-    with current_app.open_resource('schema.sql') as f:
-        db.executescript(f.read().decode('utf8'))
+    return g.mongo
 
 
-@click.command('init-db')
-@with_appcontext
-def init_db_command():
-    """Clear the existing data and create new tables."""
-    init_db()
-    click.echo('Initialized the database.')
+
+def close_mongo(e=None):
+    mongo = g.pop('mongo', None)
+
+    if mongo is not None:
+        mongo.close()
 
 def init_app(app):
-    app.teardown_appcontext(close_db)
-    app.cli.add_command(init_db_command)
+    app.teardown_appcontext(close_mongo)
 
