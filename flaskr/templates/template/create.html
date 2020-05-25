@@ -23,7 +23,7 @@
     </div>
     <div class="input-field col s12">
       <select type="text" name="ostype" id=ostype required>
-        <option value="" selected=true value=''>Select The OS</option>
+        <option value="" selected=true value=''> Select The OS </option>
         <option value=IOS-XE>IOS-XE</option>
         <option value=IOS-XR>IOS-XR</option>
         <option value=NEXUS>NEXUS</option>
@@ -32,7 +32,7 @@
     </div>
     <div class="input-field col s12">
       <select type="text" name="platform" id=platform required>
-        <option value="" selected=true value=''>Select The Platform</option>
+        <option value="" selected=true value=''> Select The Platform </option>
         <option value=ASR9k>ASR9k</option>
         <option value=N7000>N7000</option>
         <option value=NCS5500>NCS5500</option>
@@ -41,9 +41,10 @@
     </div>
     <div class="input-field col s12">
       <select name=commands id=commands required multiple data-live-search="true">
-        {% for command in commands %}
-          <option value={{command}}>{{command}}</option>
-        {% endfor %}
+        <option value="" value='' disabled> Select The Commands </option>
+          {% for command in commands %}
+            <option value={{command}}>{{command}}</option>
+          {% endfor %}
       </select>
       <label for=commands>Show commands</label></br>
     </div>

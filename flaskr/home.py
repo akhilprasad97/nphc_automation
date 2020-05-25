@@ -17,7 +17,7 @@ def index():
         input_file = request.files['file']
         input_file.save(secure_filename(input_file.filename))
         print("The customer name is '" + customer + "'")
-        #print(secure_name(input_file.filename))
+
     return render_template('home.html')
 
 

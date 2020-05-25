@@ -1,12 +1,8 @@
-
-
 import pymongo
-
 from sshtunnel import SSHTunnelForwarder
 import click
 from flask import current_app, g
 from flask.cli import with_appcontext
-
 
 def get_mongo():
     if 'mongo' not in g:
@@ -25,8 +21,6 @@ def get_mongo():
         g.mongo = pymongo.MongoClient('127.0.0.1', server.local_bind_port)
 
     return g.mongo
-
-
 
 def close_mongo(e=None):
     mongo = g.pop('mongo', None)
