@@ -7,6 +7,7 @@ from flask import (
 )
 from werkzeug.utils import secure_filename
 from flaskr.db import get_mongo
+
 bp = Blueprint('home', __name__, url_prefix='/home')
 @bp.route('/', methods=('GET', 'POST'))
 def index():
@@ -17,7 +18,7 @@ def index():
         input_file.save(secure_filename(input_file.filename))
         print("The customer name is '" + customer + "'")
         #print(secure_name(input_file.filename))
-
+    return render_template('home.html')
 
 
 
