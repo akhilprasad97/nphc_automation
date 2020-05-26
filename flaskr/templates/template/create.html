@@ -7,48 +7,54 @@
 {% endblock %}
 
 {% block content %}
-<div class="row white-text" >
-  <form>
-    <div class="input-field col s12">
-      <input placeholder="Enter Customer Name" name="customer" id="customer" type="text" required>
-      <label for="customer">Customer Name</label>
-    </div>
-    <div class="input-field col s12">
-      <input placeholder="Enter Template Name" name="template" id="template" type="text" required>
-      <label for="customer">Template Name</label>
-    </div>
-    <div class="input-field col s12">
-      <input placeholder="Enter Description" name="desc" id="desc" type="text" required >
-      <label for="desc">Description</label>
-    </div>
-    <div class="input-field col s12">
-      <select type="text" name="ostype" id=ostype required>
-        <option value="" selected=true value=''> Select The OS </option>
-        <option value=IOS-XE>IOS-XE</option>
-        <option value=IOS-XR>IOS-XR</option>
-        <option value=NEXUS>NEXUS</option>
-      </select>
-      <label for=ostype>OS Type</label>
-    </div>
-    <div class="input-field col s12">
-      <select type="text" name="platform" id=platform required>
-        <option value="" selected=true value=''> Select The Platform </option>
-        <option value=ASR9k>ASR9k</option>
-        <option value=N7000>N7000</option>
-        <option value=NCS5500>NCS5500</option>
-      </select>
-      <label for=platform>Platform</label></br>
-    </div>
-    <div class="input-field col s12">
-      <select name=commands id=commands required multiple data-live-search="true">
-        <option value="" value='' disabled> Select The Commands </option>
-          {% for command in commands %}
-            <option value={{command}}>{{command}}</option>
-          {% endfor %}
-      </select>
-      <label for=commands>Show commands</label></br>
-    </div>
-  <input type="submit" class="btn btn-secondary btn-sm" value="Create">
-  </form>
-</div>
+  <div class="row white-text" >
+    <form method="POST" action="#">
+      <div class="input-field col s12">
+        <input placeholder="Enter Customer Name" name="customer" id="customer" type="text" required>
+        <label for="customer">Customer Name</label>
+      </div>
+
+      <div class="input-field col s12">
+        <input placeholder="Enter Template Name" name="template" id="template" type="text" required>
+        <label for="customer">Template Name</label>
+      </div>
+
+      <div class="input-field col s12">
+        <input placeholder="Enter Description" name="desc" id="desc" type="text" required >
+        <label for="desc">Description</label>
+      </div>
+
+      <div class="input-field col s12">
+        <select type="text" name="ostype" id="ostype" required>
+          <option value="" selected=true value=''> Select The OS </option>
+          <option value=IOS-XE disabled> IOS-XE </option>
+          <option value=IOS-XR> IOS-XR </option>
+          <option value=NX-OS disabled> NX-OS </option>
+        </select>
+        <label for=ostype>OS Type</label>
+      </div>
+
+      <div class="input-field col s12">
+        <select type="text" name="platform" id="platform" required>
+          <option value="" selected=true value=''> Select The Platform </option>
+          <option value="ASR9k">ASR9k</option>
+          <option value="N7000" disabled>N7000</option>
+          <option value="NCS5500" disabled>NCS5500</option>
+        </select>
+        <label for=platform>Platform</label></br>
+      </div>
+
+      <div class="input-field col s12">
+        <select name="commands" id="commands" required multiple data-live-search="true">
+          <option value="" value='' disabled> Select The Commands </option>
+            {% for command in commands %}
+              <option value="{{command}}">{{command}}</option>
+            {% endfor %}
+        </select>
+        <label for=commands>Show commands</label></br>
+      </div>
+      
+    <input type="submit" class="btn btn-secondary btn-sm" value="Create">
+    </form>
+  </div>
 {% endblock %}

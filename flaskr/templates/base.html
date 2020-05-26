@@ -83,11 +83,20 @@
 
 <script>
   function enable_button(){
-    var temp_status = document.getElementById("template_name").value;
-    var cust_status = document.getElementById("customer_name").value;
+    var temp_status = document.getElementById("template").value;
+    var cust_status = document.getElementById("customer").value;
     if(temp_status!="" && cust_status!=""){
       document.getElementById("launch_btn").disabled = false;
     }
+  }
+
+  function enable_template(){
+    console.log("Hello")
+    var sel = document.getElementById("template")
+    var opt = document.createElement("option")
+    var text = "asasss"
+    sel.append(opt)
+    console.log(opt.text)
   }
 
   function validate_file_ext(){

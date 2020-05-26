@@ -9,6 +9,7 @@ from werkzeug.utils import secure_filename
 from flaskr.db import get_mongo
 
 bp = Blueprint('home', __name__, url_prefix='/home')
+
 @bp.route('/', methods=('GET', 'POST'))
 def index():
     if request.method == 'POST':
@@ -18,14 +19,16 @@ def index():
         input_file.save(secure_filename(input_file.filename))
         print("The customer name is '" + customer + "'")
 
-    return render_template('home.html')
+    mongo = get_mongo()
+    template_coll = mongo["temp_UI"]["templates"]
+    templates = template_coll.find()
+    temp_coll = {}
+    for temp in templates:
+        if temp["customer"] in temp_coll:
+            temp_coll[temp["customer"]].append(temp["template_name"])
+            continue
+        temp_coll[temp["customer"]] = [temp["template_name"]]
+    print(temp_coll)
 
-
-
-    
-
-
-
-   
-    
+    return render_template('home.html', template_customer=temp_coll)
     

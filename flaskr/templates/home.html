@@ -11,21 +11,18 @@
 <div class="white-text">
   <form method="post" action='#' enctype = "multipart/form-data">
       <div class="input-field col s12">
-        <select name="customer" required=true placeholder="Select Customer" id="customer_name" onchange="enable_button()">
+      <select name="customer" required=true placeholder="Select Customer" id="customer" onchange="enable_template()">
           <option value="" disabled=true selected=true>Select Customer</option>
-          {% for cust in customers %}
-            <option value={{cust}}>{{cust}}</option>
+          {% for cust, template in template_customer.items() %}
+            <option value="{{cust}}">{{cust}}</option>
           {% endfor %}
         </select>
         <label>Customer</label>
       </div>
       <br>
-      <div class="input-field col s12">
-        <select type="text" name="template" required=true placeholder="Select Template" id="template_name" onchange="enable_button()">
-          <option value="" disabled=true selected=true>Select Template</option>
-          {% for template in templates %}
-            <option value={{template}}>{{template}}</option>
-          {% endfor %}
+      <div class="input-field col s12" id="template">
+        <select id="template" type="text" name="template" required=true placeholder="Select Template">
+          <option value="aad" disabled=true selected=true>Select Template</option>
         </select>
         <label>Template</label>
       </div>
