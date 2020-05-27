@@ -39,4 +39,7 @@ def create_app(test_config=None):
     from . import templates
     app.register_blueprint(templates.bp)
 
+    from . import ajax_reqs
+    app.register_blueprint(ajax_reqs.bp)
+
     return app

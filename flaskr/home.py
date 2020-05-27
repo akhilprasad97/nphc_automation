@@ -31,4 +31,3 @@ def index():
     print(temp_coll)
 
     return render_template('home.html', template_customer=temp_coll)
-    

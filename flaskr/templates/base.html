@@ -91,12 +91,22 @@
   }
 
   function enable_template(){
-    console.log("Hello")
-    var sel = document.getElementById("template")
-    var opt = document.createElement("option")
-    var text = "asasss"
-    sel.append(opt)
-    console.log(opt.text)
+    
+    var ajax_request = new XMLHttpRequest()
+    ajax_request.onreadystatechange = function(){
+      if(this.status==200 && this.readyState==4){
+        var temp = JSON.parse(this.response)["templates"]
+        console.log(temp)
+        var thtml = ""
+        for(i=0;i<temp.length;i++){
+          thtml += "option value=\"" + temp[i] + "\">" + temp[i] + "</option>"
+        }
+        console.log(thtml)
+        document.getElementById("template").innerHTML = thtml
+      }
+    }
+    ajax_request.open("GET", "/ajax_reqs/select_template?customer=" + document.getElementById("customer").value, true)
+    ajax_request.send()
   }
 
   function validate_file_ext(){
