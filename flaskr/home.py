@@ -1,7 +1,11 @@
 import functools
 import os
 import pymongo
-from flaskr.NewFile import createFolder
+from flaskr.utilities import createFolder
+
+from flaskr.analytics import appendData
+
+
 
 from collections import defaultdict
 from flask import (
@@ -9,9 +13,7 @@ from flask import (
 )
 from werkzeug.utils import secure_filename
 from flaskr.db import get_mongo
-from datetime import datetime
-
-# datetime object containing current date and time
+from datetime import datetime               # datetime object containing current date and time
 
 
 
@@ -27,16 +29,25 @@ def index():
     temp_coll = {}
     
     if request.method == 'POST':
-        customer = request.form['customer']
+        customerName = request.form['customer']
         template = request.form['template']
-        input_file = request.files['file']
-        now = datetime.now()
+        inputFile = request.files['file']
+        timeStamp = str(datetime.now())
         for temp in templates:
-            if temp['customer'] == customer:
+            if temp['customer'] == customerName:
                 platformName = temp['platform']
-        input_file.save(secure_filename(input_file.filename))
-        createFolder(customer,platformName,scriptPath,now)
-        print("The customer name is '" + customer + "'")
+
+        createFolder(customerName,platformName,scriptPath)
+        filePath = scriptPath+"/data/"+customerName+"/"+platformName+"/zipfile"
+        inputFile.filename = customerName+"_"+platformName+"_"+timeStamp+".zip"
+        os.chdir(filePath)
+        inputFile.save(secure_filename(inputFile.filename))
+        empID = 13243
+        
+        
+
+        appendData(scriptPath,empID,customerName,platformName,inputFile.filename)
+        print("The customer name is '" + customerName + "'")
 
     for temp in templates:
         if temp["customer"] in temp_coll:
